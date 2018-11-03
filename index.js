@@ -13,7 +13,10 @@ const httpServer = http.createServer((req, res) => {
 });
 
 httpServer.listen(httpPort, () => {
-  console.log("Listening on port " + httpPort, "Environment: " + env.envName);
+  console.log(
+    "HTTP Server Listening on port " + httpPort,
+    "Environment: " + env.envName
+  );
 });
 
 const httpsServerOptions = {
@@ -26,7 +29,10 @@ const httpsServer = https.createServer(httpsServerOptions, (req, res) => {
 });
 
 httpsServer.listen(httpsPort, () => {
-  console.log("Listening on port " + httpsPort, "Environment: " + env.envName);
+  console.log(
+    "HTTPS Server Listening on port " + httpsPort,
+    "Environment: " + env.envName
+  );
 });
 
 // define the route handlers
@@ -89,7 +95,7 @@ const unifiedServer = (req, res) => {
       // status ? status : 200; wouldn't this work?
       // use the payload called back by the handler or default to {}
       payload = typeof payload == "object" ? payload : {};
-      const payloadString = JSON.stringify("Hello, World!\n");
+      const payloadString = JSON.stringify({ message: "Hello, World!" });
       // const payloadString = JSON.stringify(payload);
       res.setHeader("Content-Type", "application/json");
       res.writeHead(status);
